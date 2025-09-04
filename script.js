@@ -1,23 +1,24 @@
+// ====== Data variables ======
 let totalBudget = 0;
 let categories = [];
 let expenses = [];
 
-// TODO: Replace with your Firebase project config
+// ====== Firebase configuration ======
+// Replace these with your actual Firebase project values
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID"
+  apiKey: "AIzaSyADZ-3Wd0Y6CrT7pLyVse5SSVPGOXp85yo",
+  authDomain: "expense-tracker-95702.firebaseapp.com",
+  projectId: "expense-tracker-95702"
 };
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-// For simplicity, we’ll use a demo user ID.
-// Later, you can replace with authentication UID.
+// Using a demo user for now; later you can use real auth UID
 const userDoc = db.collection("users").doc("demoUser");
 
-// Load data from Firestore
+// ====== Load data from Firestore ======
 function loadData() {
   userDoc.get()
     .then((doc) => {
@@ -38,7 +39,7 @@ function loadData() {
     .catch((err) => console.error("Error loading data:", err));
 }
 
-// Save data to Firestore
+// ====== Save data to Firestore ======
 function saveData() {
   userDoc.set({
     totalBudget,
@@ -49,7 +50,7 @@ function saveData() {
   .catch((err) => console.error("Error saving data:", err));
 }
 
-// Recalculate spent for each category
+// ====== Recalculate category spent ======
 function recalcCategorySpent() {
   categories.forEach(c => c.spent = 0);
   expenses.forEach(e => {
@@ -58,7 +59,7 @@ function recalcCategorySpent() {
   });
 }
 
-// Budget
+// ====== Budget ======
 function setBudget() {
   const input = document.getElementById("totalBudget").value;
   totalBudget = parseFloat(input) || 0;
@@ -66,7 +67,7 @@ function setBudget() {
   saveData();
 }
 
-// Category
+// ====== Category form ======
 document.getElementById("categoryForm").addEventListener("submit", function (e) {
   e.preventDefault();
   const name = document.getElementById("categoryName").value.trim();
@@ -82,7 +83,7 @@ document.getElementById("categoryForm").addEventListener("submit", function (e) 
   this.reset();
 });
 
-// Expense
+// ====== Expense form ======
 document.getElementById("expenseForm").addEventListener("submit", function (e) {
   e.preventDefault();
   const date = document.getElementById("date").value;
@@ -101,7 +102,7 @@ document.getElementById("expenseForm").addEventListener("submit", function (e) {
   this.reset();
 });
 
-// Overview
+// ====== Overview ======
 function updateOverview() {
   const totalSpent = expenses.reduce((sum, e) => sum + e.amount, 0);
   document.getElementById("totalBudgetDisplay").innerText = totalBudget.toFixed(2);
@@ -109,7 +110,7 @@ function updateOverview() {
   document.getElementById("remainingBudgetDisplay").innerText = (totalBudget - totalSpent).toFixed(2);
 }
 
-// Category dropdown
+// ====== Category dropdown ======
 function updateCategorySelect() {
   const select = document.getElementById("categorySelect");
   select.innerHTML = "";
@@ -121,7 +122,7 @@ function updateCategorySelect() {
   });
 }
 
-// Category breakdown
+// ====== Category breakdown ======
 function renderCategoryBreakdown() {
   const container = document.getElementById("categoryBreakdownList");
   container.innerHTML = "";
@@ -139,7 +140,7 @@ function renderCategoryBreakdown() {
   });
 }
 
-// Expense table
+// ====== Expense table ======
 function renderExpenseTable() {
   const tbody = document.getElementById("expenseTableBody");
   tbody.innerHTML = "";
@@ -157,7 +158,7 @@ function renderExpenseTable() {
   });
 }
 
-// Delete expense
+// ====== Delete expense ======
 function deleteExpense(index) {
   expenses.splice(index, 1);
   recalcCategorySpent();
@@ -167,5 +168,5 @@ function deleteExpense(index) {
   saveData();
 }
 
-// Initialize page
+// ====== Initialize page ======
 window.addEventListener('load', loadData);
