@@ -1,0 +1,113 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background-color: #f4f7f9;
+  padding: 30px;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+section,
+div.budget-setup,
+div.category-setup,
+div.expense-entry,
+div.overview,
+div.category-breakdown,
+div.expense-list {
+  margin-bottom: 35px;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+input,
+select,
+button {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+input,
+select {
+  flex: 1;
+  min-width: 180px;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.overview p {
+  font-size: 16px;
+  margin: 8px 0;
+}
+
+#categoryBreakdownList {
+  margin-top: 10px;
+}
+
+.category-box {
+  background: #eef3f8;
+  border-left: 5px solid #007bff;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+}
+
+.expense-list table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.expense-list th,
+.expense-list td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.expense-list th {
+  background-color: #007bff;
+  color: white;
+}
+
+.expense-list td button {
+  background-color: crimson;
+  padding: 6px 10px;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
